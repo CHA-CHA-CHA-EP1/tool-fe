@@ -22,7 +22,7 @@
 			const apiUrl = 'https://cha14.xyz/api/message';
 
 			// สร้าง message ตามรูปแบบที่กำหนด
-			const messageText = `aws-gcp-uat-clear-dynamic-reject ${inputMessage}`;
+			const messageText = `aws-gcp-uat-delete-loan-appid ${inputMessage}`;
 
 			const res = await fetch(apiUrl, {
 				method: 'POST',
@@ -76,7 +76,7 @@
 </script>
 
 <div>
-	<h3>Clear Dynamic Reject</h3>
+	<h3>Delete Application</h3>
 	<p style="color: #666; font-size: 12px; margin-bottom: 20px;">
 		Environment: {pageName}
 	</p>
@@ -84,7 +84,7 @@
 	<!-- คำเตือน -->
 	<div style="margin-bottom: 15px; padding: 10px; background: #ffebee; border: 2px solid #d32f2f;">
 		<p style="color: #c62828; margin: 0; font-size: 11px; line-height: 1.5;">
-			⚠️ Feature นี้ถ้าทดลองยิงแล้วยังไม่สามารถเข้าได้ อาจเกิดจากติด Dynamic Reject ที่ CMLOS
+			⚠️ Feature นี้จะลบ Application ระวังการใช้งาน
 		</p>
 	</div>
 
@@ -95,13 +95,13 @@
 			for="message-input"
 			style="display: block; margin-bottom: 5px; font-size: 12px; font-weight: bold;"
 		>
-			Message:
+			LNAPPID:
 		</label>
 		<input
 			id="message-input"
 			type="text"
 			bind:value={inputMessage}
-			placeholder="เช่น 31000021 หรือ 31000021,31000022"
+			placeholder="เช่น LNAPP1 หรือ LNAPP1,LNAPP2"
 			disabled={loading}
 			style="
 				width: 100%;
@@ -119,7 +119,7 @@
 				disabled={loading}
 				style="
 					padding: 12px 24px;
-					background: {loading ? '#ccc' : '#4caf50'};
+					background: {loading ? '#ccc' : '#f44336'};
 					border: 3px solid #000;
 					color: #fff;
 					font-weight: bold;
@@ -128,7 +128,7 @@
 					box-shadow: {loading ? 'none' : '3px 3px 0px #000'};
 				"
 			>
-				{loading ? 'Sending...' : 'Send Request'}
+				{loading ? 'Deleting...' : 'Delete Application'}
 			</button>
 
 			<button

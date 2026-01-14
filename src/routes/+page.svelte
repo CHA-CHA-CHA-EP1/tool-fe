@@ -1,5 +1,6 @@
 <script>
 	import MessageSender from '$lib/components/MessageSender.svelte';
+	import DeleteApplication from '$lib/components/DeleteApplication.svelte';
 
 	const pages = [
 		{ name: 'DGL JAIPUMP UAT', path: '/dgl-gcp-sit' },
@@ -8,13 +9,16 @@
 		{ name: 'DGL LOC SIT', path: '/dgl-aws-uat' }
 	];
 
-	const features = [{ name: 'Clear Dynamic Reject', id: 'clear-dynamic-reject' }];
+	const features = [
+		{ name: 'Clear Dynamic Reject', id: 'clear-dynamic-reject' },
+		{ name: 'Delete LoanAppId', id: 'delete-application' }
+	];
 
 	let selectedPage = 0;
 	let selectedFeature = 'clear-dynamic-reject';
 </script>
 
-<h1>DGL-JAIPUMP</h1>
+<h1><i>WELCOME! <span style="color: #ebebeb">develop by น้องดุ๊กแห่ง DGL</span></i></h1>
 
 <div class="flex gap-4" style="margin-bottom: 20px;">
 	{#each pages as page, index}
@@ -109,6 +113,8 @@
 	>
 		{#if selectedFeature === 'clear-dynamic-reject'}
 			<MessageSender pageName={pages[selectedPage].name} pagePath={pages[selectedPage].path} />
+		{:else if selectedFeature === 'delete-application'}
+			<DeleteApplication pageName={pages[selectedPage].name} pagePath={pages[selectedPage].path} />
 		{/if}
 	</div>
 </div>
