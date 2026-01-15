@@ -24,7 +24,7 @@
 		],
 		2: [
 			// DGL LOC UAT
-			{ name: 'Mock FaceScan 8 sec', id: 'mock-facescan' }
+			{ name: 'Accept - MockFaceScan 8 sec', id: 'mock-facescan' }
 		],
 		3: [
 			// DGL LOC SIT
