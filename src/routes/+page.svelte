@@ -1,28 +1,56 @@
 <script>
 	import MessageSender from '$lib/components/MessageSender.svelte';
 	import DeleteApplication from '$lib/components/DeleteApplication.svelte';
+	import MockFaceScan from '$lib/components/MockFaceScan.svelte';
 
 	const pages = [
 		{ name: 'DGL JAIPUMP UAT', path: '/dgl-gcp-sit' },
 		{ name: 'DGL JAIPUMP SIT', path: '/dgl-gcp-uat' },
-		{ name: 'DGL LOC UAT', path: '/dgl-aws-sit' },
-		{ name: 'DGL LOC SIT', path: '/dgl-aws-uat' }
+		{ name: 'DGL LOC UAT', path: '/dgl-aws-uat' },
+		{ name: 'DGL LOC SIT', path: '/dgl-aws-sit' }
 	];
 
-	const features = [
-		{ name: 'Clear Dynamic Reject', id: 'clear-dynamic-reject' },
-		{ name: 'Delete LoanAppId', id: 'delete-application' }
-	];
+	// Features สำหรับแต่ละ page
+	const pageFeatures = {
+		0: [
+			// DGL JAIPUMP UAT
+			{ name: 'Clear Dynamic Reject', id: 'clear-dynamic-reject' },
+			{ name: 'Delete LoanAppId', id: 'delete-application' }
+		],
+		1: [
+			// DGL JAIPUMP SIT
+			{ name: 'Clear Dynamic Reject', id: 'clear-dynamic-reject' },
+			{ name: 'Delete LoanAppId', id: 'delete-application' }
+		],
+		2: [
+			// DGL LOC UAT
+			{ name: 'Mock FaceScan 8 sec', id: 'mock-facescan' }
+		],
+		3: [
+			// DGL LOC SIT
+			{ name: 'Mock FaceScan 8 sec', id: 'mock-facescan' }
+		]
+	};
 
 	let selectedPage = 0;
 	let selectedFeature = 'clear-dynamic-reject';
+
+	// เมื่อเปลี่ยน page ให้เลือก feature แรกของ page นั้นๆ
+	$: if (selectedPage !== undefined) {
+		const currentFeatures = pageFeatures[selectedPage] || [];
+		if (currentFeatures.length > 0) {
+			selectedFeature = currentFeatures[0].id;
+		}
+	}
+
+	$: features = pageFeatures[selectedPage] || [];
 </script>
 
 <h1><i>WELCOME! <span style="color: #ebebeb">develop by น้องดุ๊กแห่ง DGL</span></i></h1>
 
 <div class="flex gap-4" style="margin-bottom: 20px;">
 	{#each pages as page, index}
-		{#if index === 0}
+		{#if index === 0 || index === 2}
 			<button
 				on:click={() => (selectedPage = index)}
 				style="
@@ -115,6 +143,8 @@
 			<MessageSender pageName={pages[selectedPage].name} pagePath={pages[selectedPage].path} />
 		{:else if selectedFeature === 'delete-application'}
 			<DeleteApplication pageName={pages[selectedPage].name} pagePath={pages[selectedPage].path} />
+		{:else if selectedFeature === 'mock-facescan'}
+			<MockFaceScan pageName={pages[selectedPage].name} pagePath={pages[selectedPage].path} />
 		{/if}
 	</div>
 </div>
