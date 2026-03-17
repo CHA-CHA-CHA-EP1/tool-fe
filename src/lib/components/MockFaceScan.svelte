@@ -21,7 +21,7 @@
 		actionType = action;
 
 		try {
-			const apiUrl = 'https://cha14.xyz/api/message';
+			const apiUrl = 'https://dgl-api.cha14.xyz/api/message';
 
 			// สร้าง message ตามรูปแบบที่กำหนด
 			let messageText = '';
